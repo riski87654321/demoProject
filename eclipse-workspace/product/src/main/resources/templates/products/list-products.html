@@ -1,0 +1,72 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+	<title>Product Directory</title>
+</head>
+
+<body>
+
+<div class="container">
+
+	<h3>Product Directory</h3>
+	<hr>
+	<a th:href="@{/products/showFormForAdd}" class="btn btn-primary">
+		Add Product
+	</a>
+	
+	<table class="table table-bordered table-striped">
+		<thead class="thead-dark">
+			<tr>
+				<th>Product Name</th>
+				<th>Category</th>
+				<th>Description</th>
+				<th>Price</th>
+				<th>Condition</th>
+				<th>Status</th>
+				<th>Unit N Stock</th>
+				<th>ManuFacturer</th>
+				<th>Action</th>
+			</tr>
+		</thead>
+		
+		<tbody>
+			<tr th:each="tempProduct : ${products}">
+			
+				<td th:text="${tempProduct.productName}" />	
+				<td th:text="${tempProduct.productCategory}" />	
+				<td th:text="${tempProduct.productDescription}" />	
+				<td th:text="${tempProduct.productPrice}" />	
+				<td th:text="${tempProduct.productCondition}" />
+				<td th:text="${tempProduct.productStatus}" />
+				<td th:text="${tempProduct.unitNstock}" />
+				<td th:text="${tempProduct.productManufacturer}" />
+				<td>
+					<a th:href="@{/products/showFormForUpdate(productId=${tempProduct.id})}" 
+							class="btn btn-info btn-sm">
+						Update
+					</a>
+					<a th:href="@{/products/delete(productId=${tempProduct.id})}"
+							class="btn btn-danger btn-sm"
+							onclick="if(!(confirm('Are you sure you want to delete the product? '))) return false">
+						Delete
+					</a>
+				</td>
+			</tr>
+		</tbody>		
+	</table>
+	
+</div>
+	
+</body>
+</html>
+
+
+
